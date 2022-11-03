@@ -3,7 +3,7 @@
 - Address = Compressed public key -> encode Bech32, Bech32m
 - Create transaction data: version,....,txid input, vout, ...........,scriptPubkey.............,nLocktime.
 | With scriptPubkey = Decode Address
-- Output unlock: version,..............................................Witness, nLocktime.
+- Output unlock: version,..............................................Witness(32bytes of S), nLocktime.
 | With Witness = dhash256(txid input & vout) * x + dhash256(unsigned raw transaction) mod (private key)
 | Witness mod (N) = Number 32 bytes
 - Verify: 
