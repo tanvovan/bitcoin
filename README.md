@@ -7,8 +7,9 @@
 | With Witness = dhash256(txid input & vout) * x + dhash256(unsigned raw transaction) mod (private key)
 | Witness mod (N) = Number 32 bytes
 - Verify: 
-- p1 = ECC(G, (dhash256(unsigned raw transaction) mod (Witness))) 
-- p2 = ECC(ECC(G, dhash256(txid input & vout)), (x mod (Witness))) 
-- x1, y1 = ECAdd(1, 2) 
-- If x1 = x
+- p1 = ECC(G, dhash256(unsigned raw transaction) mod (Witness)) 
+- x1, y1 = ECC(G, dhash256(txid input & vout))
+- p2 = ECC((x1,y1), x mod (Witness)) 
+- x2, y2 = ECAdd(p1, p2) 
+- If x2 = x
 - OK
