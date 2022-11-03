@@ -1,5 +1,5 @@
 # bitcoin
-P2PC
+* P2PC (Pay to Prototype Compressed)
 Address = Compressed public key -> encode Bech32, Bech32m
 - Create transaction data: version,....,txid input, vout, ...........,scriptPubkey.............,nLocktime.
 With scriptPubkey = Decode Address
