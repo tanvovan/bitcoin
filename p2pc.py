@@ -55,12 +55,12 @@ bytes_compress = bytes.fromhex('0021' + compr(xpub,ypub))
 address = encode('bc', 1, bytes_compress[2:])
 print('Address:', address)
 
-#--------------------------------scriptPubkey(send)-----------------------
+#--------------------------------scriptPubkey(Output lock)-----------------------
 addr = 'bc1pq0qendqa9a0taq3a5y80hsll9h7jjryd7ptqwychunwnynsf5klkww463ne'
 decoded = bytes(decode('bc', addr)).hex()
 scriptPubkey = '21' + decoded
 print('scriptPubkey:', scriptPubkey)
-#--------------------------------Witness(receive)--------------------------
+#--------------------------------Witness(Output unlock)--------------------------
 message = 34963332507398480427682254676401311569483304378095876365101580641046399456536 # unsigned raw transaction
 txid_input = '4e70baf76571193c34cf6dd12ac0fa677a6250386ade9c59ac6819dbe3ea28bf' + '00000000'
 dhash256 = int(hashlib.sha256(hashlib.sha256(bytes.fromhex(txid_input)).digest()).hexdigest(),16)
