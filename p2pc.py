@@ -63,8 +63,8 @@ print('scriptPubkey:', scriptPubkey)
 #--------------------------------Witness(Output unlock)--------------------------
 message = 34963332507398480427682254676401311569483304378095876365101580641046399456536 # unsigned raw transaction
 txid_input = '4e70baf76571193c34cf6dd12ac0fa677a6250386ade9c59ac6819dbe3ea28bf' + '00000000'
-dhash256 = int(hashlib.sha256(hashlib.sha256(bytes.fromhex(txid_input)).digest()).hexdigest(),16)
-s = (dhash256 * xpub + message)* modinv(priv,N)%N
+dsha256 = int(hashlib.sha256(hashlib.sha256(bytes.fromhex(txid_input)).digest()).hexdigest(),16)
+s = (dsha256 * xpub + message)* modinv(priv,N)%N
 s = '{0:x}'.format(s)
 if len(s)% 2 == 1:
     s = '0' + s
@@ -91,8 +91,8 @@ if dy % 2 != y_parity:
 y = dy
 
 p1 = EccMultiply(GPoint,(message * modinv(int(s,16),N))%N) # message: unsigned raw transaction
-h256x,h256y = EccMultiply(GPoint, dhash256)
-p2 = EccMultiply((h256x,h256y),(x * modinv(int(s,16),N))%N)
-x1,y1 = ECadd(p1, p2)
-print('Verify:',x1==x) # True
+x1, y1 = EccMultiply(GPoint, dsha256)
+p2 = EccMultiply((x1, y1),(x * modinv(int(s,16),N))%N)
+x2,y2 = ECadd(p1, p2)
+print('Verify:',x2 == x) # True
 
